@@ -1,0 +1,83 @@
+<button nz-button nzType="primary" (click)="showmodal()" class="buttom"><i nz-icon nzType="plus-square"
+    nzTheme="outline"></i>新增</button>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="添加用户" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+  [nzOkLoading]="isOkLoading">
+  <p class="ppp">用户名：<input nz-input nzSize="default" [(ngModel)]="qqqusername" class="inputt"></p>
+  <p class="ppp">密码：<input nz-input nzSize="default" [(ngModel)]="qqqpassword" class="inputt"></p>
+  <p class="ppp">联系电话：<input nz-input nzSize="default" [(ngModel)]="qqqusertel" class="inputt"></p>
+  <p class="ppp">电子邮箱：<input nz-input nzSize="default" [(ngModel)]="qqquseremail" class="inputt"></p>
+  <p class="ppp">用户权限：<nz-select [(ngModel)]="qqqusertype" class="inputt">
+      <nz-option nzValue="1" nzLabel="普通用户"></nz-option>
+      <nz-option nzValue="2" nzLabel="管理员"></nz-option>
+    </nz-select>
+  </p>
+</nz-modal>
+<div class="content22">
+  <nz-table #editRowTable nzBordered="false" [nzData]="listOfData" [nzPageSize]="pagesize" class="tb">
+    <thead>
+      <tr>
+        <th nzWidth="10%">用户编号</th>
+        <th nzWidth="20%">用户名</th>
+        <th nzWidth="20%">联系电话</th>
+        <th nzWidth="15%">电子邮箱</th>
+        <th nzWidth="10%">用户类型</th>
+        <th nzWidth="10%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data">
+        <td>
+          <ng-container>
+            {{ data.userid }}
+          </ng-container>
+          <ng-template #nameInputTpl>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.userid" />
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit; else usernameInputTpl">
+            {{ data.username }}
+          </ng-container>
+          <ng-template #usernameInputTpl>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.username" />
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit; else usertelInputTpl">
+            {{ data.usertel }}
+          </ng-container>
+          <ng-template #usertelInputTpl>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.usertel" />
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit; else useremailInputTpl">
+            {{ data.useremail }}
+          </ng-container>
+          <ng-template #useremailInputTpl>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.useremail" />
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit; else usertypeInputTpl">
+            {{ data.usertype }}
+          </ng-container>
+          <ng-template #usertypeInputTpl>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.usertype" />
+          </ng-template>
+        </td>
+        <td>
+          <div class="editable-row-operations">
+            <ng-container *ngIf="!editCache[data.id].edit; else saveTpl">
+              <a (click)="startEdit(data.id)">Edit</a>
+            </ng-container>
+            <ng-template #saveTpl>
+              <a (click)="saveEdit(data.id)">Save</a>
+              <a nz-popconfirm nzTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.id)">Cancel</a>
+            </ng-template>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

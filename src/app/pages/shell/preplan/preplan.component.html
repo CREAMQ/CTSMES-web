@@ -1,0 +1,130 @@
+<div class="span"><span>当前船名：MUSE&nbsp;&nbsp;</span><span>航次：0339E&nbsp;&nbsp;</span><span>备注：左靠</span></div>
+<div class="button">
+    <a nz-dropdown [nzDropdownMenu]="menu">
+        操作
+        <i nz-icon nzType="down"></i>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item (click)='choosevoyage()'>航次选择</li>
+          <li nz-menu-item (click)='TOSimport()'>TOS读取</li>
+          <li nz-menu-item>预配修改</li>
+          <li nz-menu-item>保存</li>
+          <li nz-menu-item>删除</li>
+          <li nz-menu-item>全部删除</li>
+          <li nz-menu-item><nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/">
+            导入xls
+          </nz-upload></li>
+          <li nz-menu-item>导出</li>
+          <li nz-menu-item (click)='refresh()'>刷新</li>
+          <li nz-menu-item>打印</li>
+          <li nz-menu-item>工作倍位</li>
+
+        </ul>
+      </nz-dropdown-menu>
+</div>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="航次选择" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <!-- <p>Content one</p>
+    <p>Content two</p>
+    <p>Content three</p> -->
+  <nz-table #smallTable nzSize="small" [nzData]="data" [nzScroll]="{ y: '250px' }" [nzShowPagination]='false'
+    [nzLoading]="loading">
+    <thead>
+      <tr>
+        <th nzWidth="7%" [nzSelections]="listOfSelection"></th>
+        <th nzWidth="20%">方案编号</th>
+        <th nzWidth="15%">船舶名称</th>
+        <th nzWidth="15%">航次</th>
+        <th nzWidth="20%">备注</th>
+        <!-- <th nzWidth="10%">操作</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of smallTable.data">
+        <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" (nzCheckedChange)='check()'></td>
+        <td>{{ data.plan_id }}</td>
+        <td>{{ data.ship_name }}</td>
+        <td>{{ data.voyage_id }}</td>
+        <td>{{ data.remarks }}</td>
+        <!-- <td><a (click)='chooseitem()'>选择</a></td> -->
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-modal>
+
+
+<div>
+  <nz-table #fixedTable [nzData]="listOfData" [nzBordered]='false' [nzScroll]="{ x: '4000px', y: '552px' }"
+    [nzSize]='middle' class="tb">
+    <thead>
+      <tr>
+        <th nzWidth="3.5%">方案编号</th>
+        <th nzWidth="3.5%">船箱位</th>
+        <th nzWidth="2%">作业位置</th>
+        <th nzWidth="1.5%">作业贝</th>
+        <th nzWidth="1.5%">尺寸</th>
+        <th nzWidth="1.5%">箱型</th>
+        <th nzWidth="1.5%">空重</th>
+        <th nzWidth="2%">卸货港</th>
+        <th nzWidth="1.5%">箱高</th>
+        <th nzWidth="4%">箱组</th>
+        <th nzWidth="3.5%">箱组2</th>
+        <th nzWidth="2.5%">重量等级</th>
+        <th nzWidth="1.5%">粗类</th>
+        <th nzWidth="2.5%">危险品等级</th>
+        <th nzWidth="1.5%">超</th>
+        <th nzWidth="1.5%">冷</th>
+        <th nzWidth="3%">作业列序</th>
+        <th nzWidth="2%">块号</th>
+        <th nzWidth="1.5%">凑贝</th>
+        <th nzWidth="1.5%">纯度</th>
+        <th nzWidth="3%">预分重量</th>
+        <th nzWidth="1.5%">垫脚</th>
+        <th nzWidth="3%">等级需求</th>
+        <th nzWidth="3%">层重下限</th>
+        <th nzWidth="3%">层重上限</th>
+        <th nzWidth="3%">最小重量</th>
+        <th nzWidth="3%">最大重量</th>
+        <th nzWidth="3%">0dc下限</th>
+        <th nzWidth="4%">0dc上限</th>
+       
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of fixedTable.data" class="test">
+        <td class="td">{{ data.plan_id }}</td>
+        <td class="td">{{ data.ship_position }}</td>
+        <td class="td">{{ data.working_position }}</td>
+        <td class="td">{{ data.working_bay }}</td>
+        <td class="td">{{ data.container_size }}</td>
+        <td class="td">{{ data.container_type }}</td>
+        <td class="td">{{ data.empty_weight }}</td>
+        <td class="td">{{ data.unloading_port }}</td>
+        <td class="td">{{ data.container_high }}</td>
+        <td class="td">{{ data.container_group }}</td>
+        <td class="td">{{ data.container_group2 }}</td>
+        <td class="td">{{ data.weight_level }}</td>
+        <td class="td">{{ data.Coarse_class }}</td>
+        <td class="td">{{ data.dangerous_level }}</td>
+        <td class="td">{{ data.overweight }}</td>
+        <td class="td">{{ data.refrigerator }}</td>
+        <td class="td">{{ data.working_order }}</td>
+        <td class="td">{{ data.block_id }}</td>
+        <td class="td">{{ data.coubei }}</td>
+        <td class="td">{{ data.purity }}</td>
+        <td class="td">{{ data.preallocation_weight }}</td>
+        <td class="td">{{ data.foot_pad }}</td>
+        <td class="td">{{ data.level_requirement }}</td>
+        <td class="td">{{ data.layerweight_lowerlimit }}</td>
+        <td class="td">{{ data.layerweight_toplimit }}</td>
+        <td class="td">{{ data.min_weight }}</td>
+        <td class="td">{{ data.max_weight }}</td>
+        <td class="td">{{ data._0dc_lowerlimit }}</td>
+        <td class="td">{{ data._0dc_toplimit }}</td>
+
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+

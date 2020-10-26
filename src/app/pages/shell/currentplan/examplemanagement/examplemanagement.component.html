@@ -1,0 +1,445 @@
+<div class="ddd">
+  <p class="title">配载案例详情</p>
+</div>
+<div class="dddd">
+  <p class="pid">PID: {{this.PID}}</p>
+</div>
+<div class="search">
+  <div nz-row [nzGutter]="16">
+    <div nz-col class="gutter-row" [nzSpan]="6">
+      <div class="inner-box">
+        <div class="example-input">
+          <nz-input-group [nzSuffix]="suffixIcon">
+            <input placeholder="input here" nz-input [(ngModel)]="inputValue" (ngModelChange)="onChange($event)"
+              [nzAutocomplete]="auto" />
+          </nz-input-group>
+          <ng-template #suffixIcon>
+            <i nz-icon nzType="search"></i>
+          </ng-template>
+          <nz-autocomplete #auto>
+          </nz-autocomplete>
+        </div>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="6">
+      <div class="inner-box">
+        <button nz-button nzType="primary" (click)='getshipname(selectedShipname)' class="button1">查询</button>
+        <button nz-button nzType="default" (click)='reset()' class="button2">重置</button>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="6">
+      <div class="inner-box"></div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="6">
+      <div class="inner-box"></div>
+    </div>
+  </div>
+</div>
+<div class='button'>
+  <button nz-button nzType="primary" [nzSize]="size" (click)="showModal()"><i nz-icon nzType="form" nzTheme="outline"></i>配置参数</button>
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="配置参数" (nzOnCancel)="handleCancel()" [nzFooter]="modalFooter">
+    <div nz-row>
+      <div nz-col [nzSpan]="18" [nzPush]="6">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+      <div nz-col [nzSpan]="6" [nzPull]="18" class="item">
+        箱组:
+      </div>
+    </div>
+    <div nz-row>
+      <div nz-col [nzSpan]="18" [nzPush]="6">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+      <div nz-col [nzSpan]="6" [nzPull]="18" class="item">
+        船贝:
+      </div>
+    </div>
+    <h2>scoreParameter:</h2>
+    <h3>ideal_send_container_number:</h3>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">理想发箱数量:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <h3>pairs:</h3>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">层差重量参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">水平重量参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">理想重量分参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">邻居分参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <h3>qx:</h3>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">整取贝参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">遗留箱参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">遗留箱b重量上浮参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">间隔列参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">箱量分-最小值:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">箱量分-最大值:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">箱量分参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">区吸引度-本贝:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">箱区吸引度-邻居贝:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">箱区吸引度-间隔贝:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">场地贝吸引度分-其余场地贝:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">场地贝吸引度分-间隔剩余:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <h3>state:</h3>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">取箱直角分划分层参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">取箱直角分层分层分数参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">取箱直角分层下层参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">取箱直角分层上层参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">取箱胖子分划分层参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">胖子分上参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">胖子分下参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">胖子分划分理想列:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">瘦高分比例:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">瘦高分参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">封顶需求量分:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">封顶需求量分加分版本:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">陆侧层高分:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <h3>known:</h3>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">移机分参数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <h3>sameYard:</h3>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">同区分-邻居同区:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">同区分-邻居不同区:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">同区分-上叠同区:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">同区分-上叠不同区:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <h2>pruneParameter:</h2>
+    <h3>prune:</h3>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">剪枝策略保留数:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="16" class="item">箱组拆分界限:</div>
+      <div nz-col nzSpan="8"><input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+    </div>
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">取消</button>
+      <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">创建任务</button>
+    </ng-template>
+  </nz-modal>
+</div>
+<div class="table">
+  <div class="tablecontent">
+    <nz-table #taskTable [nzFrontPagination]="true" [nzData]="tasks" [nzPageSize]='8'>
+      <thead>
+        <tr>
+          <th nzShowExpand nzWidth="5%"></th>
+          <th nzWidth="10%">状态</th>
+          <th nzWidth="25%">uuid</th>
+          <th nzWidth="15%">创建时间</th>
+          <th nzWidth="20%">进度</th>
+          <th nzWidth="25%">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-template ngFor let-task [ngForOf]="taskTable.data">
+          <!-- 父表 -->
+          <tr>
+            <td [(nzExpand)]="task.expand" (click)="getTask(task)">
+              <i nz-icon nzType="plus-square" nzTheme="outline" *ngIf="!task.expand"></i>
+              <i nz-icon nzType="minus-square" nzTheme="outline" *ngIf="task.expand"></i>
+            </td>
+            <td [ngSwitch]="task.status">
+              <nz-badge *ngSwitchCase="0" nzStatus="processing" nzText="配载中"></nz-badge>
+              <nz-badge *ngSwitchCase="1" nzStatus="success" nzText="已完成"></nz-badge>
+              <nz-badge *ngSwitchCase="-1" nzStatus="default" nzText="已取消"></nz-badge>
+              <nz-badge *ngSwitchDefault nzStatus="error" nzText="异常"></nz-badge>
+            </td>
+            <td>{{task.uuid}}</td>
+          <td>{{task.datetime}}</td>
+          <td><nz-progress [nzPercent]="task.progress" nzSize="small"></nz-progress></td>
+          <td>
+            <ng-container>
+              <a (click)="opendrawer()">参数</a>
+
+              <nz-divider nzType="vertical"></nz-divider>
+            </ng-container>
+            <ng-container *ngIf="task.status === 1">
+              <a (click)="deck(task.uuid)">舱面结果</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a (click)="hold(task.uuid)">舱内结果</a>
+              <nz-divider nzType="vertical"></nz-divider>
+            </ng-container>
+            <ng-container *ngIf="task.status === 0">
+              <a (click)="cancelTask(task)">取消</a>
+              <nz-divider nzType="vertical"></nz-divider>
+            </ng-container>
+            <ng-container>
+              <a (click)="removeTask(task)">删除</a>
+            </ng-container>
+          </td>
+        </tr>
+          <!-- 子表 -->
+          <tr [nzExpand]="task.expand">
+            <td></td>
+            <td colspan="7">
+              <nz-table #innerTable [nzData]="data" nzSize="middle" [nzShowPagination]="false">
+              <thead>
+                <tr>
+                  <th nzWidth="11%">状态</th>
+                  <th nzWidth="25%">childTaskId</th>
+                  <th nzWidth="15%">箱组</th>
+                  <th nzWidth="12%">开始时间</th>
+                  <th nzWidth="12%">结束时间</th>
+                  <th nzWidth="5%">dh</th>
+                  <th nzWidth="15%">进度</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of innerTable.data">
+                  <td [ngSwitch]="data.status">
+                    <nz-badge *ngSwitchCase="0" nzStatus="processing" nzText="配载中"></nz-badge>
+                    <nz-badge *ngSwitchCase="1" nzStatus="success" nzText="已完成"></nz-badge>
+                    <nz-badge *ngSwitchCase="-1" nzStatus="default" nzText="已取消"></nz-badge>
+                    <nz-badge *ngSwitchDefault nzStatus="error" nzText="异常"></nz-badge>
+                  </td>
+                  <td>{{ data.childTaskId }}</td>
+                  <td>{{ data.ctnGroup }}</td>
+                  <td>{{ data.startTime}}</td>
+                  <td>{{ data.endTime}}</td>
+                  <td>{{ data.dh }}</td>
+                  <td><nz-progress [nzPercent]="data.progress" nzSize="small"></nz-progress></td>
+                </tr>
+              </tbody>
+            </nz-table>
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </nz-table>
+  </div>
+
+</div>
+
+<nz-drawer [nzBodyStyle]="{height: 'calc(100% - 55px)', 'padding-bottom': '53px'  }" [nzWidth]="400" [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzTitle="参数详情" (nzOnClose)="closedrawer()"
+>
+  <h4>剪枝参数</h4>
+  <br />
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">pick_res_count</div>
+    <div nz-col nzSpan="8"  class="item3">10</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">prestow_count_limit</div>
+    <div nz-col nzSpan="8"  class="item3">90</div>
+  </div>
+  <br />
+  <h4>打分参数</h4>
+  <br />
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">ideal_send_container_number</div>
+    <div nz-col nzSpan="8"  class="item3">10</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">known.known_moving_machine_p</div>
+    <div nz-col nzSpan="8"  class="item3">60</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">pairs.pairs_weight_h_p</div>
+    <div nz-col nzSpan="8"  class="item3">0.1</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">pairs.pairs_weight_ideal_p</div>
+    <div nz-col nzSpan="8"  class="item3">1</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">pairs.pairs_weight_neighbor_p</div>
+    <div nz-col nzSpan="8"  class="item3">0.3</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">pairs.pairs_weight_v_p</div>
+    <div nz-col nzSpan="8"  class="item3">1</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_attract_degrees_best_p</div>
+    <div nz-col nzSpan="8"  class="item3">0</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_attract_degrees_ideal_p</div>
+    <div nz-col nzSpan="8"  class="item3">1</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_attract_degrees_ok_p</div>
+    <div nz-col nzSpan="8"  class="item3">5</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_ctn_count_max_p</div>
+    <div nz-col nzSpan="8"  class="item3">99</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_ctn_count_min_p</div>
+    <div nz-col nzSpan="8"  class="item3">20</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_ctn_count_p</div>
+    <div nz-col nzSpan="8"  class="item3">8</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_interval_p</div>
+    <div nz-col nzSpan="8"  class="item3">0.5</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_legacy_contianers_p</div>
+    <div nz-col nzSpan="8"  class="item3">0.5</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_legacy_hi_floating_p</div>
+    <div nz-col nzSpan="8"  class="item3">3</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_take_all_p</div>
+    <div nz-col nzSpan="8"  class="item3">25</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_yard_bay_attract_degrees_best</div>
+    <div nz-col nzSpan="8"  class="item3">0</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_yard_bay_attract_degrees_reject</div>
+    <div nz-col nzSpan="8"  class="item3">15</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">same_yard.neighbor_diff_yard_p</div>
+    <div nz-col nzSpan="8"  class="item3">17</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">same_yard.upper_diff_yard_p</div>
+    <div nz-col nzSpan="8"  class="item3">7</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">same_yard.upper_same_yard_p</div>
+    <div nz-col nzSpan="8"  class="item3">0</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">state.state_caps_need_p</div>
+    <div nz-col nzSpan="8"  class="item3">10</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">state.state_caps_need_p_v3</div>
+    <div nz-col nzSpan="8"  class="item3">0</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">state.state_landside_height_p</div>
+    <div nz-col nzSpan="8"  class="item3">150,35,30,3,2,1,0</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">state.state_rect_bigger_p</div>
+    <div nz-col nzSpan="8"  class="item3">10</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">state.state_rect_p</div>
+    <div nz-col nzSpan="8"  class="item3">4</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">state.state_rect_score_p</div>
+    <div nz-col nzSpan="8"  class="item3">999,1,1,1,2</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_legacy_contianers_p</div>
+    <div nz-col nzSpan="8"  class="item3">0.5</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="16"  class="item">qx.qx_legacy_contianers_p</div>
+    <div nz-col nzSpan="8"  class="item3">0.5</div>
+  </div>
+
+</nz-drawer>

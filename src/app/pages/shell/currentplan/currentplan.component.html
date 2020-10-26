@@ -1,0 +1,177 @@
+<nz-tabset [nzTabBarExtraContent]="extraTemplate" [nzSize]="large">
+  <nz-tab nzTitle="当前方案">
+    <div class="tabcontent">
+      <div class="search">
+        <div nz-row [nzGutter]="16">
+          <div nz-col class="gutter-row" [nzSpan]="6">
+            <div class="inner-box">
+              <div class="example-input">
+                <nz-input-group [nzSuffix]="suffixIcon">
+                  <input placeholder="input here" nz-input [(ngModel)]="inputValue" (ngModelChange)="onChange($event)"
+                    [nzAutocomplete]="auto" />
+                </nz-input-group>
+                <ng-template #suffixIcon>
+                  <i nz-icon nzType="search"></i>
+                </ng-template>
+                <nz-autocomplete #auto>
+                </nz-autocomplete>
+              </div>
+            </div>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="6">
+            <div class="inner-box">
+              <button nz-button nzType="primary" (click)='getshipname(selectedShipname)' class="button1">查询</button>
+              <button nz-button nzType="default" (click)='reset()' class="button2">重置</button>
+            </div>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="6">
+            <div class="inner-box"></div>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="6">
+            <div class="inner-box"></div>
+          </div>
+        </div>
+      </div>
+      <nz-table #basicTable [nzData]="listOfData" [nzScroll]="{ x:'2000px',y: '430px'}" [nzShowPagination]='false'>
+        <thead>
+          <tr>
+            <th nzWidth="8%">方案编号</th>
+            <th nzWidth="7%">航次</th>
+            <th nzWidth="7%">船名</th>
+            <th nzWidth="5%">靠泊方向</th>
+            <th nzWidth="6%">箱量</th>
+            <th nzWidth="5%">倒配</th>
+            <th nzWidth="22%">边装边卸贝位</th>
+            <th nzWidth="15%">备注</th>
+            <th nzWidth="10%">记录时间</th>
+            <th nzWidth="5%">用户编号</th>
+            <th nzRight='0px'>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td (click)='click(data.plan_id)' class="click">{{ data.plan_id }}</td>
+            <td>{{ data.voyage_id }}</td>
+            <td>{{ data.ship_name }}</td>
+            <td>{{ data.berthing_direction }}</td>
+            <td>{{ data.container_quantity }}</td>
+            <td>{{ data.inversion }}</td>
+            <td>{{ data.babx_bay }}</td>
+            <td>{{ data.remarks }}</td>
+            <td>{{ data.record_time }}</td>
+            <td>{{ data.user_id }}</td>
+            <td nzRight='0px'>
+              <a (click)='examplemanagement(data.plan_id)'>算例管理</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a nz-dropdown [nzDropdownMenu]="menu">
+                更多操作
+                <i nz-icon nzType="down"></i>
+              </a>
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                  <li nz-menu-item>预配数据</li>
+                  <li nz-menu-item>在场箱数据</li>
+                  <li nz-menu-item>箱组划分</li>
+                  <li nz-menu-item>重量等级划分</li>
+                  <li nz-menu-item>QCWP</li>
+                </ul>
+              </nz-dropdown-menu>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </nz-tab>
+  <nz-tab nzTitle="历史方案">
+    <div class="tabcontent">
+      <div class="search">
+        <div nz-row [nzGutter]="16">
+          <div nz-col class="gutter-row" [nzSpan]="6">
+            <div class="inner-box">
+              <div class="example-input">
+                <nz-input-group [nzSuffix]="suffixIcon">
+                  <input placeholder="input here" nz-input [(ngModel)]="inputValue" (ngModelChange)="onChange($event)"
+                    [nzAutocomplete]="auto" />
+                </nz-input-group>
+                <ng-template #suffixIcon>
+                  <i nz-icon nzType="search"></i>
+                </ng-template>
+                <nz-autocomplete #auto>
+                  <nz-auto-optgroup *ngFor="let group of optionGroups" [nzLabel]="groupTitle">
+                    <ng-template #groupTitle>
+                      <span>{{ group.title }}
+                        <a class="more-link" href="https://www.google.com/search?q=ng+zorro" target="_blank">更多</a>
+                      </span>
+                    </ng-template>
+                    <nz-auto-option *ngFor="let option of group.children" [nzLabel]="option.title"
+                      [nzValue]="option.title">
+                      {{ option.title }}
+                      <span class="certain-search-item-count">{{ option.count }} 人 关注</span>
+                    </nz-auto-option>
+                  </nz-auto-optgroup>
+                </nz-autocomplete>
+              </div>
+            </div>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="6">
+            <div class="inner-box">
+              <button nz-button nzType="primary" (click)='getshipname(selectedShipname)' class="button1">查询</button>
+              <button nz-button nzType="default" (click)='reset()' class="button2">重置</button>
+            </div>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="6">
+            <div class="inner-box"></div>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="6">
+            <div class="inner-box"></div>
+          </div>
+        </div>
+      </div>
+      <nz-table #basicTable2 [nzData]="listOfData2" [nzScroll]="{ x:'2000px',y: '450px'}" [nzShowPagination]='false'>
+        <thead>
+          <tr>
+            <th nzWidth="8%">方案编号</th>
+            <th nzWidth="7%">航次</th>
+            <th nzWidth="7%">船名</th>
+            <th nzWidth="5%">靠泊方向</th>
+            <th nzWidth="6%">箱量</th>
+            <th nzWidth="5%">倒配</th>
+            <th nzWidth="22%">边装边卸贝位</th>
+            <th nzWidth="15%">备注</th>
+            <th nzWidth="10%">记录时间</th>
+            <th nzWidth="5%">用户编号</th>
+            <th nzRight='0px'>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable2.data">
+            <td (click)='click()' class="click">{{ data.plan_id }}</td>
+            <td>{{ data.voyage_id }}</td>
+            <td>{{ data.ship_name }}</td>
+            <td>{{ data.berthing_direction }}</td>
+            <td>{{ data.container_quantity }}</td>
+            <td>{{ data.inversion }}</td>
+            <td>{{ data.babx_bay }}</td>
+            <td>{{ data.remarks }}</td>
+            <td>{{ data.record_time }}</td>
+            <td>{{ data.user_id }}</td>
+            <td nzRight='0px'>
+              <a>刷新</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a>恢复</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </nz-tab>
+</nz-tabset>
+<ng-template #extraTemplate>
+  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="操作" [(ngModel)]="selectedValue" nzDisabled>
+    <nz-option nzLabel="预配数据" nzValue="1"></nz-option>
+    <nz-option nzLabel="在场箱数据" nzValue="2"></nz-option>
+    <nz-option nzLabel="箱组划分" nzValue="3"></nz-option>
+    <nz-option nzLabel="重量等级划分" nzValue="4"></nz-option>
+    <nz-option nzLabel="QCWP" nzValue="5"></nz-option>
+  </nz-select>
+</ng-template>

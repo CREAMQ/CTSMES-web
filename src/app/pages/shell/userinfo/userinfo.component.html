@@ -1,0 +1,26 @@
+<div class="content">
+  <div class="title">用户个人信息
+    <button nz-button nzType="link" (click)="showModal()">
+      <span class="xiugai">修改</span>
+    </button>
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="用户信息修改" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+      [nzOkLoading]="isOkLoading">
+      <p class="ppp">用户名：<input nz-input nzSize="default" [(ngModel)]="this.new_username" class="inputt"></p>
+      <p class="ppp">联系电话：<input nz-input nzSize="default" [(ngModel)]="this.new_usertel" class="inputt"></p>
+      <p class="ppp">电子邮箱： <input nz-input nzSize="default" [(ngModel)]="this.new_useremail" class="inputt"></p>
+    </nz-modal>
+  </div>
+
+
+  <nz-descriptions nzTitle="" nzBordered [nzSize]='default' class='test'>
+    <nz-descriptions-item nzTitle="用户编号">{{list.userid}}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="用户名">{{this.username}}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="联系电话">{{list.usertel}}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="电子邮件">{{list.useremail}}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="注册时间">{{list.regtime}}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="用户类型">{{list.usertype}}</nz-descriptions-item>
+  </nz-descriptions>
+
+  
+
+</div>

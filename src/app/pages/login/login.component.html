@@ -1,0 +1,36 @@
+<img class="logo2" src="../../../assets/Logo/SMU Logo2.jpg">
+<div class="container">
+<div> 
+  <h1 class="title">Log in to CTSEMS</h1>
+    <form nz-form  class="login-form" >
+      <p class="word">&nbsp;Username</p>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your username!">
+          <nz-input-group nzPrefixIcon="user" class="input">
+            <input type="text" nz-input placeholder="用户名" [(ngModel)]="username" [ngModelOptions]="{standalone: true}"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <p class="word">&nbsp;Password</p>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input placeholder="密码" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <label nz-checkbox>
+            <span>Remember me</span>
+          </label>
+          <a class="login-form-forgot">Forgot password</a>
+          <button nz-button class="login-form-button" class="loggin" (click)="login()" nzBlock>Log in</button>
+          Or
+          <a routerLink = "/register">register now!</a>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>
+

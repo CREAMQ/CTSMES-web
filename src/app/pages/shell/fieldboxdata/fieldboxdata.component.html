@@ -1,0 +1,139 @@
+<!-- <div class="span"><span>当前船名：{{sn}}&nbsp;&nbsp;</span><span>航次：{{vi}}&nbsp;&nbsp;</span><span>备注：{{re}}</span></div> -->
+<div class="span"><span>当前船名：MUSE&nbsp;&nbsp;</span><span>航次：0339E &nbsp;&nbsp;</span><span>备注：左靠</span></div>
+<div class="button">
+    <a nz-dropdown [nzDropdownMenu]="menu">
+        操作
+        <i nz-icon nzType="down"></i>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item (click)='choosevoyage()'>航次选择</li>
+          <li nz-menu-item (click)='TOSimport()'>TOS读取</li>
+          <li nz-menu-item>保存</li>
+          <li nz-menu-item>删除</li>
+          <li nz-menu-item>全部删除</li>
+          <li nz-menu-item><nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/">
+            导入xls
+          </nz-upload></li>
+          <li nz-menu-item>导出</li>
+          <li nz-menu-item (click)='refresh()'>刷新</li>
+          <li nz-menu-item>打印</li>
+
+        </ul>
+      </nz-dropdown-menu>
+</div>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="航次选择" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <!-- <p>Content one</p>
+    <p>Content two</p>
+    <p>Content three</p> -->
+  <nz-table #smallTable nzSize="small" [nzData]="data" [nzScroll]="{ y: '250px' }" [nzShowPagination]='false'
+    [nzLoading]="loading">
+    <thead>
+      <tr>
+        <th nzWidth="7%" [nzSelections]="listOfSelection"></th>
+        <th nzWidth="20%">方案编号</th>
+        <th nzWidth="15%">船舶名称</th>
+        <th nzWidth="15%">航次</th>
+        <th nzWidth="20%">备注</th>
+        <!-- <th nzWidth="10%">操作</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of smallTable.data">
+        <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" (nzCheckedChange)='check()'></td>
+        <td>{{ data.plan_id }}</td>
+        <td>{{ data.ship_name }}</td>
+        <td>{{ data.voyage_id }}</td>
+        <td>{{ data.remarks }}</td>
+        <!-- <td><a (click)='chooseitem()'>选择</a></td> -->
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-modal>
+
+
+<div >
+  <nz-table #fixedTable [nzData]="listOfData" [nzBordered]='false' [nzScroll]="{ x: '4000px', y: '552px' }"
+    [nzSize]='middle' class="tb">
+    <thead>
+      <tr class="t">
+        <th nzWidth="3.5%">方案编号</th>
+        <th nzWidth="3.5%">集装箱号</th>
+        <th nzWidth="4%">箱组</th>
+        <th nzWidth="1.5%">尺寸</th>
+        <th nzWidth="1.5%">箱高</th>
+        <th nzWidth="1.5%">箱型</th>
+        <th nzWidth="1.5%">粗类</th>
+        <th nzWidth="1.5%">空重</th>
+        <th nzWidth="2%">卸货港</th>
+        <th nzWidth="2%">箱重</th>
+        <th nzWidth="3%">场箱位</th>
+        <th nzWidth="2%">箱组2</th>
+        <th nzWidth="3%">重量等级</th>
+        <th nzWidth="3%">等级范围</th>
+        <th nzWidth="3%">工作倍位</th>
+        <th nzWidth="2%">区</th>
+        <th nzWidth="2%">船箱位</th>
+        <th nzWidth="3%">配载顺序</th>
+        <th nzWidth="3%">发箱顺序</th>
+        <th nzWidth="3%">翻箱数</th>
+        <th nzWidth="3%">块号</th>
+        <th nzWidth="4%">凑贝原因节点</th>
+        <th nzWidth="3%">凑贝分数</th>
+        <th nzWidth="3%">凑贝抽箱</th>
+        <th nzWidth="4%">凑贝重量等级</th>
+        <th nzWidth="3%">凑贝吨差</th>
+        <th nzWidth="3%">凑贝策略</th>
+        <th nzWidth="3%">预分层级</th>
+        <th nzWidth="4%">配载原因节点</th>
+        <th nzWidth="3%">装载时间</th>
+        <th nzWidth="2%">冷</th>
+        <th nzWidth="2%">超</th>
+        <th nzWidth="2%">危</th>
+        <th nzWidth="3%">单证锁</th>
+        <th nzWidth="2%">备注</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of fixedTable.data" class="test">
+        <td>{{ data.plan_id }}</td>
+        <td>{{ data.container_id }}</td>
+        <td>{{ data.container_group }}</td>
+        <td>{{ data.container_size }}</td>
+        <td>{{ data.container_high }}</td>
+        <td>{{ data.container_type }}</td>
+        <td>{{ data.Coarse_class }}</td>
+        <td>{{ data.empty_weight }}</td>
+        <td>{{ data.unloading_port }}</td>
+        <td>{{ data.container_weight }}</td>
+        <td>{{ data.fieldbox_position }}</td>
+        <td>{{ data.container_group2 }}</td>
+        <td>{{ data.weight_level }}</td>
+        <td>{{ data.level_range }}</td>
+        <td>{{ data.working_bay }}</td>
+        <td>{{ data.area }}</td>
+        <td>{{ data.ship_position }}</td>
+        <td>{{ data.stowage_order }}</td>
+        <td>{{ data.outbox_order }}</td>
+        <td>{{ data.turns_number }}</td>
+        <td>{{ data.block_id }}</td>
+        <td>{{ data.coubei_node }}</td>
+        <td>{{ data.coubei_mark }}</td>
+        <td>{{ data.coubei_chouxiang }}</td>
+        <td>{{ data.coubei_weightlevel }}</td>
+        <td>{{ data.coubei_tondiff }}</td>
+        <td>{{ data.coubei_static }}</td>
+        <td>{{ data.preallocation_level }}</td>
+        <td>{{ data.stowage_node }}</td>
+        <td>{{ data.load_time }}</td>
+        <td>{{ data.refrigerator }}</td>
+        <td>{{ data.overweight }}</td>
+        <td>{{ data.dangerous_cargo }}</td>
+        <td>{{ data.document_lock }}</td>
+        <td>{{ data.remarks }}</td>
+
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

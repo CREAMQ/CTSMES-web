@@ -1,0 +1,56 @@
+
+  <div class="content">
+    <div nz-row nzGutter=14 class="content-search">
+      <div nz-col nzSpan=2 nzOffset=1>
+        <p>航次编号：</p>
+      </div>
+      <div nz-col nzSpan=5>
+        <nz-select style="width:100%;" nzShowSearch nzAllowClear nzPlaceHolder="选择查询航次" [(ngModel)]="selectedvoyageid">
+          <div *ngFor="let listOfVoyageid of listOfVoyageid">
+            <nz-option nzLabel={{listOfVoyageid.listOfVoyageid}} nzValue={{listOfVoyageid.listOfVoyageid}}></nz-option>
+          </div>
+        </nz-select>
+      </div>
+      <div nz-col nzSpan=2 nzOffset=1>
+        <button nz-button nzType="primary" (click)='getvoyageid(selectedvoyageid)'>查询</button>
+      </div>
+      <div nz-col nzSpan=3>
+        <p>船舶名称：</p>
+      </div>
+      <div nz-col nzSpan=5>
+        <nz-select style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="选择查询船舶" [(ngModel)]="selectedShipname">
+          <div *ngFor="let listOfShipname of listOfShipname">
+            <nz-option nzLabel={{listOfShipname.listOfShipname}} nzValue={{listOfShipname.listOfShipname}}></nz-option>
+          </div>
+        </nz-select>
+      </div>
+      <div nz-col nzSpan=2 nzOffset=1>
+        <button nz-button nzType="primary" (click)='getshipname(selectedShipname)'>查询</button>
+      </div>
+      <div nz-col nzSpan=2>
+        <button nz-button nzType="default" (click)='reset()'>重置</button>
+      </div>
+    </div>
+   
+  <div class="content-table">
+    <nz-table #filterTable [nzData]="displayData" [nzScroll]="{y: '450px' }" [nzShowPagination]='false' [nzBordered]='true'>
+      <thead (nzSortChange)="sort($event)" nzSingleSort>
+        <tr>
+          <th nzShowSort nzSortKey="voyage_id" nzWidth='15%'>航次编号</th>
+          <th nzShowSort nzSortKey="ship_name" nzWidth='15%'>船舶名称</th>
+          <th nzWidth='35%'>备注</th>
+          <th nzWidth='15%'>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let Data of filterTable.data">
+          <td>{{Data.voyage_id}}</td>
+          <td>{{Data.ship_name}}</td>
+          <td>{{Data.remarks}}</td>
+          <td><a (click)='import()'>导入</a></td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  </div>
+  

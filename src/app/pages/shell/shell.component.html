@@ -1,0 +1,66 @@
+<nz-layout class="left-layout">
+  <nz-sider *ngIf="this.type">
+    <div class="titlearea" [routerLink]="['/login']">CTSEMS</div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineIndent]="30" [nzInlineCollapsed]="isCollapsed">
+      <!-- <li nz-menu-item nz-tooltip nzPlacement="right">
+        <i nz-icon nzType="mail"></i>
+        <span>首页总览</span>
+      </li> -->
+      <li nz-menu-item nz-tooltip nzPlacement="right" (click)='shipinfoimport()'>
+        <i nz-icon nzType="import"></i>
+        <span>船舶信息导入</span>
+      </li>
+      <li nz-menu-item nz-tooltip nzPlacement="right" (click)='fieldboxdata()'>
+        <i nz-icon nzType="file-text"></i>
+        <span>在场箱数据</span>
+      </li>
+      <li nz-menu-item nz-tooltip nzPlacement="right" (click)='preplan()'>
+        <i nz-icon nzType="file-text"></i>
+        <span>预配数据</span>
+      </li>
+      <li nz-menu-item nz-tooltip nzPlacement="right" (click)='plan()'>
+        <i nz-icon nzType="setting"></i>
+        <span>配载案例管理</span>
+      </li>
+      <li nz-submenu nzTitle="用户管理" nzIcon="team">
+        <ul>
+          <li nz-menu-item (click)='userinfo()'>个人信息</li>
+          <li nz-menu-item (click)='usermanagement()' *ngIf="this.type=='2'">用户数据管理</li>
+        </ul>
+      </li>
+      <!-- <li nz-menu-item nz-tooltip nzPlacement="right" (click)='usermanagement()'>
+        <i nz-icon nzType="team"></i>
+        <span>用户数据管理</span>
+      </li> -->
+    </ul>
+  </nz-sider>
+
+
+  <nz-layout class="right-layout">
+    <nz-header *ngIf="this.type" class="header" ><span class="sp">集装箱码头配载算例管理系统</span>
+      <div class="ba">
+        <i nz-icon nzType="user" nzTheme="outline"></i>admin&nbsp;&nbsp;&nbsp;
+        <span [routerLink]="['/login']" class="tuichu"><i nz-icon nzType="logout" nzTheme="outline"></i>登出</span>
+      </div>
+      
+    </nz-header>
+    <div class='bread' *ngIf="this.type">
+      <nz-breadcrumb [nzAutoGenerate]='true'>
+        <nz-breadcrumb-item>
+          <a><i nz-icon nzType="home"></i><span>首页</span></a>
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
+    </div>
+    <nz-content class="content" *ngIf="this.type;else xxx ">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <ng-template #xxx >
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </ng-template>
+    <nz-footer *ngIf="this.type ">集装箱码头配载算例管理系统 ©2020 上海海事大学</nz-footer>
+  </nz-layout>
+</nz-layout>
